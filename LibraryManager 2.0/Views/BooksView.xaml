@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" FontSize="32" FontWeight="Bold" Text="Books"/>
-            <Button Grid.Column="1" FontSize="16" Content="Add" />
+            <Button Grid.Column="1" FontSize="16" Content="Add" Command="{Binding AddBooksCommand}"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="00 20 0 0">
@@ -29,8 +29,8 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <components:BooksListing Grid.Column="0"/>
-            <components:BooksDetails Grid.Column="1" Margin="20 0 0 0"/>
+            <components:BooksListing Grid.Column="0" DataContext="{Binding BooksListingViewModel}"/>
+            <components:BooksDetails Grid.Column="1" Margin="20 0 0 0" DataContext="{Binding BooksDetailsViewModel}"/>
         </Grid>
 
     </Grid>

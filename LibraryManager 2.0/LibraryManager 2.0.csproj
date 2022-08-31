@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <PackageReference Include="DropdownMenu.WPF" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
