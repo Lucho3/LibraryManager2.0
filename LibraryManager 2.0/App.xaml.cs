@@ -1,4 +1,5 @@
-﻿using LibraryManager_2._0.ViewModels;
+﻿using LibraryManager_2._0.Stores;
+using LibraryManager_2._0.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,14 +15,20 @@ namespace LibraryManager_2._0
     /// </summary>
     public partial class App : Application
     {
+        private readonly SelctedBookStore _selctedBookStore;
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
-                DataContext=new BooksViewModel()
+                DataContext=new BooksViewModel(_selctedBookStore)
             };
             MainWindow.Show();
             base.OnStartup(e);
+        }
+
+        public App()
+        {
+            _selctedBookStore = new SelctedBookStore();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManager_2._0.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,10 @@ namespace LibraryManager_2._0.ViewModels
         public ICommand AddBooksCommand { get; }
 
 
-        public BooksViewModel()
+        public BooksViewModel(SelctedBookStore _selctedBookStore)
         {
-            BooksDetailsViewModel = new BooksDetailsViewModel();
-            BooksListingViewModel = new BooksListingViewModel();
+            BooksDetailsViewModel = new BooksDetailsViewModel(_selctedBookStore);
+            BooksListingViewModel = new BooksListingViewModel(_selctedBookStore);
         }
 
 

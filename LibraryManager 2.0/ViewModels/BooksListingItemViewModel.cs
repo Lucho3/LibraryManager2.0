@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManager_2._0.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +10,17 @@ namespace LibraryManager_2._0.ViewModels
 {
     class BooksListingItemViewModel : ViewModelBase
     {
-        public string Author { get; }
+        public Book Book { get; }
+
+        public string Author => Book.Author;
 
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
 
-        public BooksListingItemViewModel(string author)
+
+        public BooksListingItemViewModel(Book book)
         {
-            Author = author;
+            Book = book;
         }
     }
 }

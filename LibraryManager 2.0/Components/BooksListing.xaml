@@ -17,7 +17,7 @@
                     x:Name="border"
                     Background="white"
                     CornerRadius="5"/>
-                <ListView BorderThickness="0" ItemsSource="{Binding BooksListingItemViewModels}">
+                <ListView BorderThickness="0"  SelectedItem="{Binding SelectedBookListingItemViewModel}" ItemsSource="{Binding BooksListingItemViewModels}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

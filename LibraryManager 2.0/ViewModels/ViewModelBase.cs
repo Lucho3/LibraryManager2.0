@@ -15,5 +15,7 @@ namespace LibraryManager_2._0.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        protected virtual void Dispose() { }
     }
 }
