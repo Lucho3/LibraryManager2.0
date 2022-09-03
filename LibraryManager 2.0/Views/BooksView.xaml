@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" FontSize="32" FontWeight="Bold" Text="Books"/>
+            <TextBlock Grid.Column="0" Style="{StaticResource PageHeader}" FontWeight="Bold" Text="Books"/>
             <Button Grid.Column="1" FontSize="16" Content="Add" Command="{Binding AddBooksCommand}"/>
         </Grid>
 

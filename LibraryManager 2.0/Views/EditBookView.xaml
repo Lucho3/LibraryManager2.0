@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="LibraryManager_2._0.Views.EditBookView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryManager_2._0.Views" xmlns:components="clr-namespace:LibraryManager_2._0.Components"
+             mc:Ignorable="d" Width="413" Height="398">
+    <Grid Background="White" Margin="0,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Style="{StaticResource PageHeader}" FontWeight="Bold" Text="Edit Book"/>
+
+        <components:BookDetailsForm Grid.Row="1" Margin="0,20,32,-142"/>
+    </Grid>
+</UserControl>

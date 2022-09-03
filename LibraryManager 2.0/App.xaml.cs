@@ -15,12 +15,14 @@ namespace LibraryManager_2._0
     /// </summary>
     public partial class App : Application
     {
+        private readonly ModalNavigationStore _modalNavigationStore;
         private readonly SelctedBookStore _selctedBookStore;
         protected override void OnStartup(StartupEventArgs e)
         {
+            BooksViewModel booksViewModel = new BooksViewModel(_selctedBookStore);
             MainWindow = new MainWindow()
             {
-                DataContext=new BooksViewModel(_selctedBookStore)
+                DataContext=new MainViewModel(_modalNavigationStore, booksViewModel)
             };
             MainWindow.Show();
             base.OnStartup(e);
@@ -29,6 +31,7 @@ namespace LibraryManager_2._0
         public App()
         {
             _selctedBookStore = new SelctedBookStore();
+            _modalNavigationStore = new ModalNavigationStore();
         }
     }
 }

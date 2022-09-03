@@ -10,6 +10,7 @@ namespace LibraryManager_2._0.ViewModels
 {
     class BooksViewModel : ViewModelBase
     {
+
         public BooksListingViewModel BooksListingViewModel { get; }
 
         public BooksDetailsViewModel BooksDetailsViewModel { get; }
