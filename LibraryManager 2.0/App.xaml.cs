@@ -19,7 +19,7 @@ namespace LibraryManager_2._0
         private readonly SelctedBookStore _selctedBookStore;
         protected override void OnStartup(StartupEventArgs e)
         {
-            BooksViewModel booksViewModel = new BooksViewModel(_selctedBookStore);
+            BooksViewModel booksViewModel = new BooksViewModel(_selctedBookStore,_modalNavigationStore);
             MainWindow = new MainWindow()
             {
                 DataContext=new MainViewModel(_modalNavigationStore, booksViewModel)

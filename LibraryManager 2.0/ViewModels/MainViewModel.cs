@@ -22,7 +22,6 @@ namespace LibraryManager_2._0.ViewModels
             BooksViewModel = booksViewModel;
 
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
-            _modalNavigationStore.CurrentViewModel = new EditBookViewModel();
         }
 
         protected override void Dispose()

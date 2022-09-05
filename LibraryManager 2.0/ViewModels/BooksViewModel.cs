@@ -1,4 +1,5 @@
-﻿using LibraryManager_2._0.Stores;
+﻿using LibraryManager_2._0.Commands;
+using LibraryManager_2._0.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,11 @@ namespace LibraryManager_2._0.ViewModels
         public ICommand AddBooksCommand { get; }
 
 
-        public BooksViewModel(SelctedBookStore _selctedBookStore)
+        public BooksViewModel(SelctedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore)
         {
             BooksDetailsViewModel = new BooksDetailsViewModel(_selctedBookStore);
             BooksListingViewModel = new BooksListingViewModel(_selctedBookStore);
+            AddBooksCommand = new OpenAddBookCommand(modalNavigationStore);
         }
 
 
