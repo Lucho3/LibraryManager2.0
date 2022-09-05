@@ -25,6 +25,11 @@ namespace LibraryManager_2._0.Stores
             }
         }
 
+        internal void Close()
+        {
+            CurrentViewModel = null;
+        }
+
         public bool IsOpen => CurrentViewModel != null;
 
         public event Action CurrentViewModelChanged;

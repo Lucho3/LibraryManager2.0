@@ -75,7 +75,7 @@ namespace LibraryManager_2._0.ViewModels
             }
             set
             {
-                _genre = value;
+                _language = value;
                 OnPropertyChanged(nameof(Language));
             }
         }
@@ -109,6 +109,9 @@ namespace LibraryManager_2._0.ViewModels
         }
 
         private int _quantityT;
+
+
+
         public int QuantityT
         {
             get
@@ -124,9 +127,15 @@ namespace LibraryManager_2._0.ViewModels
 
         public bool CanSubmit => !string.IsNullOrEmpty(Title);
 
-        public ICommand SumbitCommand { get; }
+        public ICommand SubmitCommnd { get; }
 
         public ICommand CancelCommand { get; }
+
+        public BookDetailsFormViewModel(ICommand submitCommand, ICommand cancelCommand)
+        {
+            SubmitCommnd = submitCommand;
+            CancelCommand = cancelCommand;
+        }
 
 
 

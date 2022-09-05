@@ -12,6 +12,6 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Style="{StaticResource PageHeader}" FontWeight="Bold" Text="Edit Book"/>
 
-        <components:BookDetailsForm Grid.Row="1" Margin="0,20,32,-142"/>
+        <components:BookDetailsForm Grid.Row="1" Margin="0,20,32,-142" DataContext="{Binding BookDetailsFormViewModel}"/>
     </Grid>
 </UserControl>

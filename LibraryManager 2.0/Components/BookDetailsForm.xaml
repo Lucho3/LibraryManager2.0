@@ -32,7 +32,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" FontWeight="Bold" Text="Title:" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                <TextBox Width="200" Grid.Column="1"  Text="{Binding Title}" VerticalAlignment="Center"/>
+                <TextBox Width="200" Grid.Column="1"  Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
             </Grid>
 
 
@@ -119,7 +119,7 @@
 
         <WrapPanel Margin="15 30 0 0" Grid.Row="1">
             <Button FontSize="18" Content="Submit" IsEnabled="{Binding CanSubmit}" Command="{Binding SubmitCommnd}" Margin="0 0 20 0"/>
-            <Button FontSize="18" Content="Cancel" Style="{StaticResource ButtonScondary}" Command="{Binding CancelCommnd}"/>
+            <Button FontSize="18" Content="Cancel" Style="{StaticResource ButtonScondary}" Command="{Binding CancelCommand}"/>
         </WrapPanel>
     </Grid>
 </UserControl>

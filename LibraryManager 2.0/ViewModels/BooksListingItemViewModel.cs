@@ -18,8 +18,9 @@ namespace LibraryManager_2._0.ViewModels
         public ICommand DeleteCommand { get; }
 
 
-        public BooksListingItemViewModel(Book book)
+        public BooksListingItemViewModel(Book book,ICommand editCommand)
         {
+            EditCommand = editCommand;
             Book = book;
         }
     }

@@ -21,7 +21,7 @@ namespace LibraryManager_2._0.ViewModels
         public BooksViewModel(SelctedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore)
         {
             BooksDetailsViewModel = new BooksDetailsViewModel(_selctedBookStore);
-            BooksListingViewModel = new BooksListingViewModel(_selctedBookStore);
+            BooksListingViewModel = new BooksListingViewModel(_selctedBookStore,modalNavigationStore);
             AddBooksCommand = new OpenAddBookCommand(modalNavigationStore);
         }
 
