@@ -15,7 +15,7 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="{Binding Author}"/>
+                <TextBlock Grid.Column="0" Text="{Binding Title}"/>
 
                 <custom:DropdownMenu x:Name="dropdown" Grid.Column="1" Margin="10 0 0 0">
                     <Border Background="White" BorderBrush="Gray" BorderThickness="1">

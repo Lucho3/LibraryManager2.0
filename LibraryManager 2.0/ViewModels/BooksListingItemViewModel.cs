@@ -1,4 +1,6 @@
-﻿using LibraryManager_2._0.Models;
+﻿using LibraryManager_2._0.Commands;
+using LibraryManager_2._0.Models;
+using LibraryManager_2._0.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +12,25 @@ namespace LibraryManager_2._0.ViewModels
 {
     class BooksListingItemViewModel : ViewModelBase
     {
-        public Book Book { get; }
+        public BooksListingItemViewModel(Book book, BooksStore booksStore, ModalNavigationStore modalNavigationStore)
+        {
+            Book = book;
+            EditCommand = new OpenEditBookCommand(this,booksStore,modalNavigationStore);
+        }
 
-        public string Author => Book.Author;
+        public Book Book { get; private set; }
+
+        public string Title => Book.Title;
 
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
+        public BooksStore BooksStore { get; }
+        public ModalNavigationStore ModalNavigationStore { get; }
 
-
-        public BooksListingItemViewModel(Book book,ICommand editCommand)
+        public void Update(Book obj)
         {
-            EditCommand = editCommand;
-            Book = book;
+            Book = obj;
+            OnPropertyChanged(nameof(Title));
         }
     }
 }

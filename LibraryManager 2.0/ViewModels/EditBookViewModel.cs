@@ -12,11 +12,13 @@ namespace LibraryManager_2._0.ViewModels
 {
     class EditBookViewModel:ViewModelBase
     {
+        public Guid BookId { get; }
         public BookDetailsFormViewModel BookDetailsFormViewModel { get; }
 
-        public EditBookViewModel(Book book,ModalNavigationStore modalNavigationStore)
+        public EditBookViewModel(Book book, BooksStore _booksStore, ModalNavigationStore modalNavigationStore)
         {
-            ICommand editCommand = new EditBookCommand(modalNavigationStore);
+            BookId = book.Id;
+            ICommand editCommand = new EditBookCommand(this,_booksStore, modalNavigationStore);
             ICommand cancelCommand = new CloseModalCommand(modalNavigationStore);
             BookDetailsFormViewModel = new BookDetailsFormViewModel(editCommand, cancelCommand)
             {

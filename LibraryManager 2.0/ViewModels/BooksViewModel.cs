@@ -17,12 +17,11 @@ namespace LibraryManager_2._0.ViewModels
         public BooksDetailsViewModel BooksDetailsViewModel { get; }
         public ICommand AddBooksCommand { get; }
 
-
-        public BooksViewModel(SelctedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore)
+        public BooksViewModel(SelctedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore, BooksStore booksStore)
         {
             BooksDetailsViewModel = new BooksDetailsViewModel(_selctedBookStore);
-            BooksListingViewModel = new BooksListingViewModel(_selctedBookStore,modalNavigationStore);
-            AddBooksCommand = new OpenAddBookCommand(modalNavigationStore);
+            BooksListingViewModel = new BooksListingViewModel(booksStore, _selctedBookStore,modalNavigationStore);
+            AddBooksCommand = new OpenAddBookCommand(booksStore,modalNavigationStore);
         }
 
 

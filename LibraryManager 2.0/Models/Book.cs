@@ -8,8 +8,9 @@ namespace LibraryManager_2._0.Models
 {
     class Book
     {
-        public Book(string author, string date, string title, string genre, string language, int nPages, int quantity, int quantityT)
+        public Book(Guid id,string author, DateTime date, string title, string genre, string language, int nPages, int quantity, int quantityT)
         {
+            Id = id;
             Author = author;
             Date = date;
             Title = title;
@@ -20,8 +21,9 @@ namespace LibraryManager_2._0.Models
             QuantityT = quantityT;
         }
 
+        public Guid Id { get; }
         public string Author { get; }
-        public string Date { get; }
+        public DateTime Date { get; }
         public string Title { get; }
         public string Genre { get; }
         public string Language { get; }

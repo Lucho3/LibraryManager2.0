@@ -15,9 +15,9 @@ namespace LibraryManager_2._0.ViewModels
 
         public BookDetailsFormViewModel BookDetailsFormViewModel { get; }
 
-        public AddBookViewModel(ModalNavigationStore modalNavigationStore)
+        public AddBookViewModel(BooksStore booksStore, ModalNavigationStore modalNavigationStore)
         {
-            ICommand submitCommand=new AddBookCommand(modalNavigationStore);
+            ICommand submitCommand=new AddBookCommand(this,booksStore,modalNavigationStore);
             ICommand cancelCommand = new CloseModalCommand(modalNavigationStore);
             BookDetailsFormViewModel = new BookDetailsFormViewModel(submitCommand, cancelCommand);
         }

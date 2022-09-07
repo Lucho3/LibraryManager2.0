@@ -24,8 +24,8 @@ namespace LibraryManager_2._0.ViewModels
             }
         }
 
-        private string _date;
-        public string Date
+        private DateTime _date;
+        public DateTime Date
         {
             get
             {

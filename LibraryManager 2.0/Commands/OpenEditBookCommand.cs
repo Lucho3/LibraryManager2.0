@@ -11,18 +11,23 @@ namespace LibraryManager_2._0.Commands
 {
     class OpenEditBookCommand:CommandBase
     {
-        private readonly Book _book;
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly BooksListingItemViewModel _booksListingItemViewModel;
+        private readonly BooksStore _booksStore;
 
-        public OpenEditBookCommand(Book book,ModalNavigationStore modalNavigationStore)
+        public OpenEditBookCommand(BooksListingItemViewModel booksListingItemViewModel, BooksStore booksStore, ModalNavigationStore modalNavigationStore)
         {
-            _book = book;
+            _booksListingItemViewModel = booksListingItemViewModel;
+            _booksStore = booksStore;
             _modalNavigationStore = modalNavigationStore;
         }
 
+
+
         public override void Execute(object parameter)
         {
-            EditBookViewModel editBookViewModel = new EditBookViewModel(_book,_modalNavigationStore);
+            Book book = _booksListingItemViewModel.Book;
+            EditBookViewModel editBookViewModel = new EditBookViewModel(book,_booksStore,_modalNavigationStore);
             _modalNavigationStore.CurrentViewModel = editBookViewModel;
         }
     }

@@ -14,7 +14,9 @@ namespace LibraryManager_2._0.ViewModels
     class BooksListingViewModel:ViewModelBase
     {
         private readonly ObservableCollection<BooksListingItemViewModel> _booksListingItemViewModel;
+        private readonly BooksStore booksStore;
         private readonly SelctedBookStore selctedBookStore;
+        private readonly ModalNavigationStore modalNavigationStore;
 
         public IEnumerable<BooksListingItemViewModel> BooksListingItemViewModels => _booksListingItemViewModel;
 
@@ -34,22 +36,43 @@ namespace LibraryManager_2._0.ViewModels
             }
         }
 
-        public BooksListingViewModel(SelctedBookStore _selctedBookStore,ModalNavigationStore modalNavigationStore)
+        public BooksListingViewModel(BooksStore _booksStore, SelctedBookStore _selctedBookStore,ModalNavigationStore _modalNavigationStore)
         {
+            booksStore = _booksStore;
             selctedBookStore = _selctedBookStore;
+            modalNavigationStore = _modalNavigationStore;
             _booksListingItemViewModel = new ObservableCollection<BooksListingItemViewModel>();
 
-            AddBook(new Book("a1", "22.11.2021", "t1", "g1", "l1", 5, 5, 5), modalNavigationStore);
-            AddBook(new Book("a1", "d1", "t2", "g1", "l1", 5, 5, 5), modalNavigationStore);
-            AddBook(new Book("a1", "d1", "t3", "g1", "l1", 5, 5, 5), modalNavigationStore);
-
-          
+            booksStore.BookAdded += BooksStore_BookAdded;
+            booksStore.BookUpdated += BooksStore_BookUpdated;
+        
         }
 
-        private void AddBook(Book book, ModalNavigationStore modalNavigationStore)
+        private void BooksStore_BookUpdated(Book obj)
         {
-            ICommand editCommand = new OpenEditBookCommand(book,modalNavigationStore);
-            _booksListingItemViewModel.Add(new BooksListingItemViewModel(book,editCommand));
+            BooksListingItemViewModel bookViewModel = _booksListingItemViewModel.FirstOrDefault(b => b.Book.Id == obj.Id);
+
+            if(bookViewModel!=null)
+            {
+                bookViewModel.Update(obj);
+            }
+        }
+
+        protected override void Dispose()
+        {
+            booksStore.BookUpdated -= BooksStore_BookUpdated;
+            booksStore.BookAdded -= BooksStore_BookAdded;
+            base.Dispose(); 
+        }
+        private void BooksStore_BookAdded(Book obj)
+        {
+            AddBook(obj);
+        }
+
+        private void AddBook(Book book)
+        {
+            BooksListingItemViewModel booksListingItemViewModel = new BooksListingItemViewModel(book, booksStore, modalNavigationStore);
+            _booksListingItemViewModel.Add(booksListingItemViewModel);
         }
     }
 }
