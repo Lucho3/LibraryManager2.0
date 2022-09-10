@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryManager_2._0.Models
+namespace LibraryManager.Domain.Models
 {
-    class Book
+    public class Book
     {
         public Book(Guid id,string author, DateTime date, string title, string genre, string language, int nPages, int quantity, int quantityT)
         {

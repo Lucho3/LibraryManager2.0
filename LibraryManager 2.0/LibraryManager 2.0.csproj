@@ -17,6 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LibraryManager.Domain\LibraryManager.Domain.csproj" />
+    <ProjectReference Include="..\LibraryManager.EntityFramework\LibraryManager.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Components\logo.png" />
   </ItemGroup>
 
