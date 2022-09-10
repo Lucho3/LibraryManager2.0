@@ -15,6 +15,7 @@ namespace LibraryManager_2._0.Stores
         private readonly ICreateBookCommand _createBookCommand;
         private readonly IUpdateBookCommand _updateBookCommand;
         private readonly IDeleteBookCommand _deleteBookCommand;
+        private readonly List<Book> _books;
 
         public BooksStore(IGetAllBooksQuery getAllBooksQuery, ICreateBookCommand createBookCommand, IUpdateBookCommand updateBookCommand, IDeleteBookCommand deleteBookCommand)
         {
@@ -22,10 +23,23 @@ namespace LibraryManager_2._0.Stores
             _createBookCommand = createBookCommand;
             _updateBookCommand = updateBookCommand;
             _deleteBookCommand = deleteBookCommand;
+
+            _books = new List<Book>();
         }
 
         public event Action<Book> BookAdded;
         public event Action<Book> BookUpdated;
+
+        public IEnumerable<Book> Books => _books;
+
+        public async Task Load()
+        {
+            IEnumerable<Book> books = await _getAllBooksQuery.Execute();
+            _books.Clear();
+
+            _books.AddRange(books);
+
+        }
 
         public async Task Add(Book book)
         {
