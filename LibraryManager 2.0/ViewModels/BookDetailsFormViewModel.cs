@@ -137,11 +137,13 @@ namespace LibraryManager_2._0.ViewModels
             {
                 _isSubmitting = value;
                 OnPropertyChanged(nameof(IsSubmitting));
+                OnPropertyChanged(nameof(CanCancel));
             }
         }
 
         public bool CanSubmit => !string.IsNullOrEmpty(Title);
 
+        public bool CanCancel => !IsSubmitting;
         public ICommand SubmitCommnd { get; }
 
         public ICommand CancelCommand { get; }

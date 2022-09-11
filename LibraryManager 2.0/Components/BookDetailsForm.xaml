@@ -120,7 +120,7 @@
 
         <WrapPanel Margin="0,20,15,183" Grid.Row="1">
             <Button FontSize="18" Content="Submit" IsEnabled="{Binding CanSubmit}" Command="{Binding SubmitCommnd}" Margin="0 0 20 0"/>
-            <Button FontSize="18" Content="Cancel" Style="{StaticResource ButtonScondary}" Command="{Binding CancelCommand}"/>
+            <Button FontSize="18" Content="Cancel" IsEnabled="{Binding CanCancel}" Style="{StaticResource ButtonScondary}" Command="{Binding CancelCommand}"/>
             <custom:LoadingSpinner IsLoading="{Binding IsSubmitting}" Thickness="2" Diameter="25" Margin="5 0 0 0"/>
         </WrapPanel>
 
