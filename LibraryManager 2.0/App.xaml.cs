@@ -2,6 +2,7 @@
 using LibraryManager.Domain.Queries;
 using LibraryManager_2._0.Stores;
 using LibraryManager_2._0.ViewModels;
+using LibraryManager_2._0.HostBuilders;
 using LibraryManager.EntityFramework.Commands;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+
 
 namespace LibraryManager_2._0
 {
@@ -42,13 +44,10 @@ namespace LibraryManager_2._0
         public App()
         {
            
-            _host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
-            {
-                string _connectionString = context.Configuration.GetConnectionString("sqlite");
-
-                services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(_connectionString).Options);
-                services.AddSingleton<BooksDbContextFactory>();
-
+        _host = Host.CreateDefaultBuilder()
+           .AddDbContext()
+           .ConfigureServices((context, services) =>
+           {  
                 services.AddSingleton<IGetAllBooksQuery, GetAllBooksQuery>();
                 services.AddSingleton<IDeleteBookCommand, DeleteBookCommand>();
                 services.AddSingleton<ICreateBookCommand, CreateBookCommand>();
