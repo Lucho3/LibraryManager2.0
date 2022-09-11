@@ -20,7 +20,7 @@ namespace LibraryManager_2._0.ViewModels
         public BooksViewModel(SelctedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore, BooksStore booksStore)
         {
             BooksDetailsViewModel = new BooksDetailsViewModel(_selctedBookStore);
-            BooksListingViewModel = new BooksListingViewModel(booksStore, _selctedBookStore,modalNavigationStore);
+            BooksListingViewModel =BooksListingViewModel.LoadViewModel(booksStore, _selctedBookStore,modalNavigationStore);
             AddBooksCommand = new OpenAddBookCommand(booksStore,modalNavigationStore);
         }
 

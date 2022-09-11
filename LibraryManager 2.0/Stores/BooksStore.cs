@@ -32,6 +32,8 @@ namespace LibraryManager_2._0.Stores
 
         public IEnumerable<Book> Books => _books;
 
+        public event Action BooksLoaded;
+
         public async Task Load()
         {
             IEnumerable<Book> books = await _getAllBooksQuery.Execute();
@@ -39,11 +41,15 @@ namespace LibraryManager_2._0.Stores
 
             _books.AddRange(books);
 
+            BooksLoaded?.Invoke();
+
         }
 
         public async Task Add(Book book)
         {
             await _createBookCommand.Execute(book);
+
+            _books.Add(book);
 
             BookAdded?.Invoke(book);
         }
@@ -52,9 +58,18 @@ namespace LibraryManager_2._0.Stores
         {
             await _updateBookCommand.Execute(book);
 
+            int currentIndex=_books.FindIndex(b => b.Id == book.Id);
+
+            if(currentIndex!=-1)
+            {
+                _books[currentIndex] = book;
+            }
+            else
+            {
+                _books.Add(book);
+            }
+
             BookUpdated?.Invoke(book);
         }
-
-
     }
 }

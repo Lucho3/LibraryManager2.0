@@ -22,6 +22,8 @@ namespace LibraryManager_2._0.ViewModels
 
         private BooksListingItemViewModel selectedBookListingItemViewModel;
 
+        public ICommand LoadBooks { get; }
+
         public BooksListingItemViewModel SelectedBookListingItemViewModel
         {
             get 
@@ -43,9 +45,30 @@ namespace LibraryManager_2._0.ViewModels
             modalNavigationStore = _modalNavigationStore;
             _booksListingItemViewModel = new ObservableCollection<BooksListingItemViewModel>();
 
+            LoadBooks = new LoadBooksCommand(booksStore);
+
+            booksStore.BooksLoaded += _booksStore_BooksLoaded;
             booksStore.BookAdded += BooksStore_BookAdded;
-            booksStore.BookUpdated += BooksStore_BookUpdated;
-        
+            booksStore.BookUpdated += BooksStore_BookUpdated;       
+        }
+
+        private void _booksStore_BooksLoaded()
+        {
+            _booksListingItemViewModel.Clear();
+
+            foreach (Book book in booksStore.Books)
+            {
+                AddBook(book);
+            }
+        }
+
+        public static BooksListingViewModel LoadViewModel(BooksStore _booksStore, SelctedBookStore _selctedBookStore, ModalNavigationStore _modalNavigationStore)
+        {
+            BooksListingViewModel viewModel = new BooksListingViewModel(_booksStore, _selctedBookStore, _modalNavigationStore);
+
+            viewModel.LoadBooks.Execute(null);
+
+            return viewModel;
         }
 
         private void BooksStore_BookUpdated(Book obj)
@@ -60,6 +83,7 @@ namespace LibraryManager_2._0.ViewModels
 
         protected override void Dispose()
         {
+            booksStore.BooksLoaded -= _booksStore_BooksLoaded;
             booksStore.BookUpdated -= BooksStore_BookUpdated;
             booksStore.BookAdded -= BooksStore_BookAdded;
             base.Dispose(); 
