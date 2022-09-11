@@ -16,6 +16,7 @@ namespace LibraryManager_2._0.ViewModels
         {
             Book = book;
             EditCommand = new OpenEditBookCommand(this,booksStore,modalNavigationStore);
+            DeleteCommand = new DeleteBookCommand(this, booksStore);
         }
 
         public Book Book { get; private set; }
@@ -27,6 +28,19 @@ namespace LibraryManager_2._0.ViewModels
         public BooksStore BooksStore { get; }
         public ModalNavigationStore ModalNavigationStore { get; }
 
+        private bool _isDeleting;
+        public bool IsDeleting
+        {
+            get
+            {
+                return _isDeleting;
+            }
+            set
+            {
+                _isDeleting = value;
+                OnPropertyChanged(nameof(IsDeleting));
+            }
+        }
         public void Update(Book obj)
         {
             Book = obj;

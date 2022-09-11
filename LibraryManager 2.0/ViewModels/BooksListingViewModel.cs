@@ -22,7 +22,6 @@ namespace LibraryManager_2._0.ViewModels
 
         private BooksListingItemViewModel selectedBookListingItemViewModel;
 
-        public ICommand LoadBooks { get; }
 
         public BooksListingItemViewModel SelectedBookListingItemViewModel
         {
@@ -45,11 +44,20 @@ namespace LibraryManager_2._0.ViewModels
             modalNavigationStore = _modalNavigationStore;
             _booksListingItemViewModel = new ObservableCollection<BooksListingItemViewModel>();
 
-            LoadBooks = new LoadBooksCommand(booksStore);
-
+            booksStore.BookDeleted += BooksStore_BookDeleted;
             booksStore.BooksLoaded += _booksStore_BooksLoaded;
             booksStore.BookAdded += BooksStore_BookAdded;
             booksStore.BookUpdated += BooksStore_BookUpdated;       
+        }
+
+        private void BooksStore_BookDeleted(Guid id)
+        {
+            BooksListingItemViewModel book=_booksListingItemViewModel.FirstOrDefault(b => b.Book?.Id == id);
+            if(book!=null)
+            {
+                _booksListingItemViewModel.Remove(book);
+            }
+           
         }
 
         private void _booksStore_BooksLoaded()
@@ -60,15 +68,6 @@ namespace LibraryManager_2._0.ViewModels
             {
                 AddBook(book);
             }
-        }
-
-        public static BooksListingViewModel LoadViewModel(BooksStore _booksStore, SelctedBookStore _selctedBookStore, ModalNavigationStore _modalNavigationStore)
-        {
-            BooksListingViewModel viewModel = new BooksListingViewModel(_booksStore, _selctedBookStore, _modalNavigationStore);
-
-            viewModel.LoadBooks.Execute(null);
-
-            return viewModel;
         }
 
         private void BooksStore_BookUpdated(Book obj)
@@ -83,6 +82,7 @@ namespace LibraryManager_2._0.ViewModels
 
         protected override void Dispose()
         {
+            booksStore.BookDeleted -= BooksStore_BookDeleted;
             booksStore.BooksLoaded -= _booksStore_BooksLoaded;
             booksStore.BookUpdated -= BooksStore_BookUpdated;
             booksStore.BookAdded -= BooksStore_BookAdded;

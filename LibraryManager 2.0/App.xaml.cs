@@ -32,7 +32,7 @@ namespace LibraryManager_2._0
         private readonly SelctedBookStore _selctedBookStore;
         protected override void OnStartup(StartupEventArgs e)
         {
-            BooksViewModel booksViewModel = new BooksViewModel(_selctedBookStore,_modalNavigationStore,_booksStore);
+            BooksViewModel booksViewModel = BooksViewModel.LoadViewModel(_selctedBookStore,_modalNavigationStore,_booksStore);
             MainWindow = new MainWindow()
             {
 

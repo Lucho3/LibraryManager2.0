@@ -125,6 +125,21 @@ namespace LibraryManager_2._0.ViewModels
             }
         }
 
+
+        private bool _isSubmitting;
+        public bool IsSubmitting
+        {
+            get
+            {
+                return _isSubmitting;
+            }
+            set
+            {
+                _isSubmitting = value;
+                OnPropertyChanged(nameof(IsSubmitting));
+            }
+        }
+
         public bool CanSubmit => !string.IsNullOrEmpty(Title);
 
         public ICommand SubmitCommnd { get; }

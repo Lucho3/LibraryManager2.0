@@ -23,9 +23,12 @@ namespace LibraryManager_2._0.Commands
         }
         public override async Task ExecuteAsync(object parameter)
         {
-            //add book to db
-
+            
             BookDetailsFormViewModel formViewModel = addBookViewModel.BookDetailsFormViewModel;
+
+            
+            formViewModel.IsSubmitting = true;
+            
             Book book = new Book(Guid.NewGuid(),formViewModel.Author,formViewModel.Date,formViewModel.Title,formViewModel.Genre,formViewModel.Language,formViewModel.NPages,formViewModel.Quantity,formViewModel.QuantityT);
             try
             {
@@ -36,6 +39,10 @@ namespace LibraryManager_2._0.Commands
             {
 
                 throw;
+            }
+            finally
+            {
+                formViewModel.IsSubmitting = false;
             }
 
            

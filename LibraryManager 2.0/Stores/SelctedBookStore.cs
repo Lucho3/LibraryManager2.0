@@ -18,8 +18,15 @@ namespace LibraryManager_2._0.Stores
             _bookStore = bookStore;
 
             _bookStore.BookUpdated += _bookStore_BookUpdated;
+            _bookStore.BookDeleted += _bookStore_BookDeleted;
         }
 
+        private void _bookStore_BookDeleted(Guid obj)
+        {
+            SelectedBook = null;
+        }
+
+        
         private void _bookStore_BookUpdated(Book obj)
         {
            if(obj.Id==_selectedBook?.Id)
@@ -42,5 +49,6 @@ namespace LibraryManager_2._0.Stores
         }
 
         public event Action SelectedBookChanged;
+
     }
 }

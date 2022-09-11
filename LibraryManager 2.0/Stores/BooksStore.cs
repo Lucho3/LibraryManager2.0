@@ -29,6 +29,7 @@ namespace LibraryManager_2._0.Stores
 
         public event Action<Book> BookAdded;
         public event Action<Book> BookUpdated;
+        public event Action<Guid> BookDeleted;
 
         public IEnumerable<Book> Books => _books;
 
@@ -70,6 +71,15 @@ namespace LibraryManager_2._0.Stores
             }
 
             BookUpdated?.Invoke(book);
+        }
+
+        public async Task Delete(Guid Id)
+        {
+            await _deleteBookCommand.Execute(Id);
+
+            _books.RemoveAll(b => b.Id == Id);
+
+            BookDeleted?.Invoke(Id);
         }
     }
 }

@@ -11,8 +11,6 @@ namespace LibraryManager_2._0.ViewModels
 {
     class AddBookViewModel:ViewModelBase
     {
-       
-
         public BookDetailsFormViewModel BookDetailsFormViewModel { get; }
 
         public AddBookViewModel(BooksStore booksStore, ModalNavigationStore modalNavigationStore)
