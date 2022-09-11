@@ -49,7 +49,7 @@ namespace LibraryManager_2._0.ViewModels
 
         public ICommand LoadBooksCommand { get; }
 
-        public BooksViewModel(SelctedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore, BooksStore booksStore)
+        public BooksViewModel(SelectedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore, BooksStore booksStore)
         {
             BooksDetailsViewModel = new BooksDetailsViewModel(_selctedBookStore);
             BooksListingViewModel = new BooksListingViewModel(booksStore, _selctedBookStore,modalNavigationStore);
@@ -59,7 +59,7 @@ namespace LibraryManager_2._0.ViewModels
         }
 
 
-        public static BooksViewModel LoadViewModel(SelctedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore, BooksStore booksStore)
+        public static BooksViewModel LoadViewModel(SelectedBookStore _selctedBookStore, ModalNavigationStore modalNavigationStore, BooksStore booksStore)
         {
             BooksViewModel viewModel = new BooksViewModel(_selctedBookStore, modalNavigationStore, booksStore);
 

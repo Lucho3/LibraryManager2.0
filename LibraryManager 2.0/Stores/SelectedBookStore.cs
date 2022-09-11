@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace LibraryManager_2._0.Stores
 {
-    class SelctedBookStore
+    class SelectedBookStore
     {
         private readonly BooksStore _bookStore;
 
         private Book _selectedBook;
 
-        public SelctedBookStore(BooksStore bookStore)
+        public SelectedBookStore(BooksStore bookStore)
         {
             _bookStore = bookStore;
 

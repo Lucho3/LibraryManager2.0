@@ -124,7 +124,8 @@
                             <TextBlock Grid.Column="1"  Text="{Binding QuantityT}"/>
                         </Grid>
                     </Grid>
-                    <Image Source="{Binding imageSource}" Margin="83,80,82,80" Grid.Column="1"/>
+
+                    <Image Source="/Pictures/logo.png" Width="75" Height="75" Grid.Column="1"/>
 
                 </Grid>
             </Grid>

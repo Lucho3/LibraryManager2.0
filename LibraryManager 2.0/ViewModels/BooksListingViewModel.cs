@@ -15,7 +15,7 @@ namespace LibraryManager_2._0.ViewModels
     {
         private readonly ObservableCollection<BooksListingItemViewModel> _booksListingItemViewModel;
         private readonly BooksStore booksStore;
-        private readonly SelctedBookStore selctedBookStore;
+        private readonly SelectedBookStore selctedBookStore;
         private readonly ModalNavigationStore modalNavigationStore;
 
         public IEnumerable<BooksListingItemViewModel> BooksListingItemViewModels => _booksListingItemViewModel;
@@ -37,7 +37,7 @@ namespace LibraryManager_2._0.ViewModels
             }
         }
 
-        public BooksListingViewModel(BooksStore _booksStore, SelctedBookStore _selctedBookStore,ModalNavigationStore _modalNavigationStore)
+        public BooksListingViewModel(BooksStore _booksStore, SelectedBookStore _selctedBookStore,ModalNavigationStore _modalNavigationStore)
         {
             booksStore = _booksStore;
             selctedBookStore = _selctedBookStore;

@@ -14,6 +14,7 @@
   <ItemGroup>
     <PackageReference Include="DropdownMenu.WPF" Version="1.0.0" />
     <PackageReference Include="LoadingSpinner.WPF" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="SimpleModal.WPF" Version="1.0.0" />
   </ItemGroup>
 
@@ -24,6 +25,13 @@
 
   <ItemGroup>
     <Resource Include="Components\logo.png" />
+    <Resource Include="Pictures\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="AppSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

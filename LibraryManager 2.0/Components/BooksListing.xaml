@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:LibraryManager_2._0.Components" 
              xmlns:custom="clr-namespace:DropdownMenuControl;assembly=DropdownMenuControl"
              mc:Ignorable="d" 
+             
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Border BorderBrush="{StaticResource BorderPrimary}" SnapsToDevicePixels="True" BorderThickness="1" CornerRadius="5">
@@ -17,14 +18,14 @@
                     x:Name="border"
                     Background="white"
                     CornerRadius="5"/>
-                <ListView BorderThickness="0"  SelectedItem="{Binding SelectedBookListingItemViewModel}" ItemsSource="{Binding BooksListingItemViewModels}">
+                <ListView MinHeight="100" MaxHeight="300" BorderThickness="0"  SelectedItem="{Binding SelectedBookListingItemViewModel}" ItemsSource="{Binding BooksListingItemViewModels}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         </Style>
                     </ListView.ItemContainerStyle>
-                    
-                    
+
+
                     <ListView.ItemTemplate>
                         <DataTemplate >
                             <local:BookListingItem/>

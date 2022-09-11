@@ -13,6 +13,9 @@ using System.Windows;
 using LibraryManager.EntityFramework.Queries;
 using LibraryManager.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace LibraryManager_2._0
 {
@@ -21,47 +24,67 @@ namespace LibraryManager_2._0
     /// </summary>
     public partial class App : Application
     {
-        private readonly IGetAllBooksQuery _getAllBooksQuery;
-        private readonly ICreateBookCommand _createBookCommand;
-        private readonly IUpdateBookCommand _updateBookCommand;
-        private readonly IDeleteBookCommand _deleteBookCommand;
-
-        private readonly BooksDbContextFactory _booksDbContextFactory;
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly BooksStore _booksStore;
-        private readonly SelctedBookStore _selctedBookStore;
+        private readonly IHost _host;
         protected override void OnStartup(StartupEventArgs e)
         {
-            BooksViewModel booksViewModel = BooksViewModel.LoadViewModel(_selctedBookStore,_modalNavigationStore,_booksStore);
-            MainWindow = new MainWindow()
+            _host.Start();
+            BooksDbContextFactory factory = _host.Services.GetRequiredService<BooksDbContextFactory>();
+            using (BooksDbContext context = factory.Create())
             {
+                context.Database.Migrate();
+            }
 
-                DataContext=new MainViewModel(_modalNavigationStore, booksViewModel)
-            };
+            MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
             base.OnStartup(e);
         }
 
         public App()
         {
-            string _connectionString = "Data Source=Books.db";
-            _booksDbContextFactory = new BooksDbContextFactory(
-                 new DbContextOptionsBuilder().UseSqlite(_connectionString).Options);
-
-            using (BooksDbContext context = _booksDbContextFactory.Create())
+           
+            _host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
             {
-                context.Database.Migrate();
-            }
+                string _connectionString = context.Configuration.GetConnectionString("sqlite");
 
-              
-            _getAllBooksQuery = new GetAllBooksQuery(_booksDbContextFactory);
-            _deleteBookCommand = new DeleteBookCommand(_booksDbContextFactory);      
-            _createBookCommand = new CreateBookCommand(_booksDbContextFactory);
-            _updateBookCommand = new UpdateBookCommand(_booksDbContextFactory);
+                services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(_connectionString).Options);
+                services.AddSingleton<BooksDbContextFactory>();
 
-            _booksStore = new BooksStore(_getAllBooksQuery, _createBookCommand, _updateBookCommand, _deleteBookCommand);
-            _selctedBookStore = new SelctedBookStore(_booksStore);
-            _modalNavigationStore = new ModalNavigationStore();
+                services.AddSingleton<IGetAllBooksQuery, GetAllBooksQuery>();
+                services.AddSingleton<IDeleteBookCommand, DeleteBookCommand>();
+                services.AddSingleton<ICreateBookCommand, CreateBookCommand>();
+                services.AddSingleton<IUpdateBookCommand, UpdateBookCommand>();
+
+                services.AddSingleton<ModalNavigationStore>();
+                services.AddSingleton<BooksStore>();
+                services.AddSingleton<SelectedBookStore>();
+
+                services.AddSingleton<MainViewModel>();
+
+                services.AddTransient<BooksViewModel>(CreateBooksViewModel);
+
+                services.AddSingleton<MainWindow>((services)=>new MainWindow()
+                { 
+                    DataContext=services.GetRequiredService<MainViewModel>()
+                });
+
+            }).Build();
+
+        }
+
+        private BooksViewModel CreateBooksViewModel(IServiceProvider services)
+        {
+            return BooksViewModel.LoadViewModel(
+                services.GetRequiredService<SelectedBookStore>(),
+                services.GetRequiredService<ModalNavigationStore>(),
+                services.GetRequiredService<BooksStore>());
+                
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _host.StartAsync();
+            _host.Dispose();
+            base.OnExit(e); 
         }
     }
 }

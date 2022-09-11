@@ -27,7 +27,6 @@ namespace LibraryManager_2._0.Commands
 
             _booksListingItemViewModel.IsDeleting = true;
             _booksListingItemViewModel.ErrorMessage = null;
-
             try
             {
                 await _booksStore.Delete(book.Id);

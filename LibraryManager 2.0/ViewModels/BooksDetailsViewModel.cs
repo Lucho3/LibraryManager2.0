@@ -12,7 +12,7 @@ namespace LibraryManager_2._0.ViewModels
 {
     class BooksDetailsViewModel : ViewModelBase
     {
-        private readonly SelctedBookStore _selctedBookStore;
+        private readonly SelectedBookStore _selctedBookStore;
         public bool HasSelectedBook => selectedBook != null;
         private Book selectedBook => _selctedBookStore.SelectedBook; 
         public string Author => selectedBook?.Author ?? "Unkonwn";
@@ -24,14 +24,10 @@ namespace LibraryManager_2._0.ViewModels
         public int Quantity => selectedBook?.Quantity ?? 0;
         public int QuantityT => selectedBook?.QuantityT ?? 0;
 
-        public BitmapImage imageSource;
-       
 
-        public BooksDetailsViewModel(SelctedBookStore selctedBookStore)
+        public BooksDetailsViewModel(SelectedBookStore selctedBookStore)
         {
 
-            //TODO
-            imageSource = new BitmapImage(new Uri(@"C:\Users\lucho\OneDrive\Desktop\LibraryManager\LibraryManager 2.0\Components\logo.png"));
             _selctedBookStore = selctedBookStore;
 
             _selctedBookStore.SelectedBookChanged += _selctedBookStore_SelectedBookChanged;
@@ -44,7 +40,7 @@ namespace LibraryManager_2._0.ViewModels
         }
         private void _selctedBookStore_SelectedBookChanged()
         {
-            //TODO snimka
+
             OnPropertyChanged(nameof(HasSelectedBook));
             OnPropertyChanged(nameof(Author));
             OnPropertyChanged(nameof(Date));

@@ -26,7 +26,7 @@
                 <RowDefinition  Height="auto"/>
                 <RowDefinition  Height="auto"/>
                 <RowDefinition  Height="auto"/>
-                <RowDefinition Height="auto"/>
+
             </Grid.RowDefinitions>
 
 
@@ -111,15 +111,7 @@
                 <TextBox Width="200" Grid.Column="1"  Text="{Binding QuantityT}" VerticalAlignment="Center"/>
             </Grid>
 
-            <Grid Grid.Row="8"  Margin="0 5 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" SharedSizeGroup="Label"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0"  FontWeight="Bold" Text="Select Banner" Margin="0 0 10 0" TextAlignment="Left" VerticalAlignment="Center"/>
-                <Button Grid.Column="1"  Content="Browse" Command="{Binding BrowseImage}" />
-            </Grid>
         </Grid>
 
 
