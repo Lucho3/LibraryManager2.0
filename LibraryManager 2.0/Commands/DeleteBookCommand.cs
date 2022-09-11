@@ -26,6 +26,7 @@ namespace LibraryManager_2._0.Commands
             Book book = _booksListingItemViewModel.Book;
 
             _booksListingItemViewModel.IsDeleting = true;
+            _booksListingItemViewModel.ErrorMessage = null;
 
             try
             {
@@ -34,7 +35,7 @@ namespace LibraryManager_2._0.Commands
             catch (Exception)
             {
 
-                throw;
+                _booksListingItemViewModel.ErrorMessage = "Failed to delete the book. Please try again later!";
             }
             finally
             {

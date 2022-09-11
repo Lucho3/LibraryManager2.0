@@ -26,6 +26,7 @@ namespace LibraryManager_2._0.Commands
             BookDetailsFormViewModel formViewModel = _editBookViewModel.BookDetailsFormViewModel;
 
             formViewModel.IsSubmitting = true;
+            formViewModel.ErrorMessage = null;
             Book book = new Book(_editBookViewModel.BookId, formViewModel.Author, formViewModel.Date, formViewModel.Title, formViewModel.Genre, formViewModel.Language, formViewModel.NPages, formViewModel.Quantity, formViewModel.QuantityT);
             try
             {
@@ -35,7 +36,7 @@ namespace LibraryManager_2._0.Commands
             catch (Exception)
             {
 
-                throw;
+                formViewModel.ErrorMessage = "Failed to update the book. Please try again later!";
             }
             finally
             {

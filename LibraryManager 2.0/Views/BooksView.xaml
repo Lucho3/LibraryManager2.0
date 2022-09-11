@@ -7,64 +7,113 @@
              xmlns:components="clr-namespace:LibraryManager_2._0.Components" 
              xmlns:custom="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="1000">
     <Grid>
-        <Grid>
-            <StackPanel VerticalAlignment="Center">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsLoading}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
+        <StackPanel VerticalAlignment="Center">
+            <StackPanel.Style>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsLoading}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
 
-                <custom:LoadingSpinner Thickness="3" Diameter="100" IsLoading="True"/>
+            <custom:LoadingSpinner
+                Diameter="100"
+                IsLoading="True"
+                Thickness="3" />
 
-                <TextBlock Margin="0 10 0 0" TextAlignment="Center" Text="Loading Books..."/>
-            </StackPanel>
-        </Grid>
-
+            <TextBlock
+                Margin="0 10 0 0"
+                Text="Loading Books..."
+                TextAlignment="Center" />
+        </StackPanel>
 
         <Grid>
             <Grid.Style>
                 <Style TargetType="Grid">
-                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Setter Property="Visibility" Value="Collapsed" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsLoading}" Value="False">
-                            <Setter Property="Visibility" Value="Visible"/>
+                            <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasErrorMessage}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Style="{StaticResource PageHeader}" FontWeight="Bold" Text="Books"/>
-                <Button Grid.Column="1" FontSize="16" Content="Add" Command="{Binding AddBooksCommand}"/>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Style="{StaticResource ErrorMessage}"
+                    Text="{Binding ErrorMessage}"
+                    TextAlignment="Center" />
             </Grid>
 
-            <Grid Grid.Row="1" Margin="00 20 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasErrorMessage}" Value="False">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                <components:BooksListing Grid.Column="0" DataContext="{Binding BooksListingViewModel}"/>
-                <components:BooksDetails Grid.Column="1" Margin="20 0 0 0" DataContext="{Binding BooksDetailsViewModel}"/>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource PageHeader}"
+                        Text="Books" />
+
+                    <Button
+                        Grid.Column="1"
+                        Command="{Binding AddBooksCommand}"
+                        Content="Add"
+                        FontSize="16" />
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <components:BooksListing Grid.Column="0" DataContext="{Binding BooksListingViewModel}" />
+
+                    <components:BooksDetails
+                        Grid.Column="1"
+                        Margin="20 0 0 0"
+                        DataContext="{Binding BooksDetailsViewModel}" />
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
+
 </UserControl>
+
+

@@ -26,7 +26,7 @@ namespace LibraryManager_2._0.Commands
             
             BookDetailsFormViewModel formViewModel = addBookViewModel.BookDetailsFormViewModel;
 
-            
+            formViewModel.ErrorMessage = null;
             formViewModel.IsSubmitting = true;
             
             Book book = new Book(Guid.NewGuid(),formViewModel.Author,formViewModel.Date,formViewModel.Title,formViewModel.Genre,formViewModel.Language,formViewModel.NPages,formViewModel.Quantity,formViewModel.QuantityT);
@@ -37,8 +37,7 @@ namespace LibraryManager_2._0.Commands
             }
             catch (Exception)
             {
-
-                throw;
+                formViewModel.ErrorMessage = "Failed to add the book. Please try again later!";
             }
             finally
             {

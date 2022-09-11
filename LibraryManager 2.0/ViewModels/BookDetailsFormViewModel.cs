@@ -110,8 +110,6 @@ namespace LibraryManager_2._0.ViewModels
 
         private int _quantityT;
 
-
-
         public int QuantityT
         {
             get
@@ -141,16 +139,33 @@ namespace LibraryManager_2._0.ViewModels
             }
         }
 
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(HasErrorMessage));
+            }
+        }
+
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
         public bool CanSubmit => !string.IsNullOrEmpty(Title);
 
         public bool CanCancel => !IsSubmitting;
-        public ICommand SubmitCommnd { get; }
+        public ICommand SubmitCommand { get; }
 
         public ICommand CancelCommand { get; }
 
         public BookDetailsFormViewModel(ICommand submitCommand, ICommand cancelCommand)
         {
-            SubmitCommnd = submitCommand;
+            SubmitCommand = submitCommand;
             CancelCommand = cancelCommand;
         }
 

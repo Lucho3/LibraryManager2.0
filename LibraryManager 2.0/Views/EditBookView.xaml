@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryManager_2._0.Views" xmlns:components="clr-namespace:LibraryManager_2._0.Components"
-             mc:Ignorable="d" Width="413" Height="398">
+             mc:Ignorable="d" Width="500" Height="400">
     <Grid Background="White" Margin="0,0,10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -12,6 +12,6 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Style="{StaticResource PageHeader}" FontWeight="Bold" Text="Edit Book"/>
 
-        <components:BookDetailsForm Grid.Row="1" Margin="0,20,32,-142" DataContext="{Binding BookDetailsFormViewModel}"/>
+        <components:BookDetailsForm Grid.Row="1" HorizontalAlignment="Left" DataContext="{Binding BookDetailsFormViewModel}"/>
     </Grid>
 </UserControl>

@@ -21,6 +21,7 @@ namespace LibraryManager_2._0.Commands
 
         public override async Task ExecuteAsync(object parameter)
         {
+            _booksViewModel.ErrorMessage = null;
             _booksViewModel.IsLoading = true;
             try
             {
@@ -28,7 +29,7 @@ namespace LibraryManager_2._0.Commands
             }
             catch (Exception)
             {
-                throw;
+                _booksViewModel.ErrorMessage="Failed to load Books. Please restart the application!";
             }
             finally
             {
