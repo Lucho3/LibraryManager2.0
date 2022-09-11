@@ -18,7 +18,7 @@
                     x:Name="border"
                     Background="white"
                     CornerRadius="5"/>
-                <ListView MinHeight="100" MaxHeight="300" BorderThickness="0"  SelectedItem="{Binding SelectedBookListingItemViewModel}" ItemsSource="{Binding BooksListingItemViewModels}">
+                <ListView SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0"  SelectedItem="{Binding SelectedBookListingItemViewModel}" ItemsSource="{Binding BooksListingItemViewModels}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

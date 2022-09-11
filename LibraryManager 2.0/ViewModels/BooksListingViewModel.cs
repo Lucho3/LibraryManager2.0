@@ -15,39 +15,50 @@ namespace LibraryManager_2._0.ViewModels
     {
         private readonly ObservableCollection<BooksListingItemViewModel> _booksListingItemViewModel;
         private readonly BooksStore booksStore;
-        private readonly SelectedBookStore selctedBookStore;
+        private readonly SelectedBookStore selectedBookStore;
         private readonly ModalNavigationStore modalNavigationStore;
 
         public IEnumerable<BooksListingItemViewModel> BooksListingItemViewModels => _booksListingItemViewModel;
-
-        private BooksListingItemViewModel selectedBookListingItemViewModel;
-
 
         public BooksListingItemViewModel SelectedBookListingItemViewModel
         {
             get 
             {
-                return selectedBookListingItemViewModel;
+                return _booksListingItemViewModel.FirstOrDefault(b=>b.Book?.Id==selectedBookStore.SelectedBook?.Id);
             }
-            set 
+            set
             {
-                selectedBookListingItemViewModel = value;
-                OnPropertyChanged(nameof(SelectedBookListingItemViewModel));
-                selctedBookStore.SelectedBook = SelectedBookListingItemViewModel?.Book;
+                selectedBookStore.SelectedBook = value?.Book;
+
+                
             }
         }
 
         public BooksListingViewModel(BooksStore _booksStore, SelectedBookStore _selctedBookStore,ModalNavigationStore _modalNavigationStore)
         {
             booksStore = _booksStore;
-            selctedBookStore = _selctedBookStore;
+            selectedBookStore = _selctedBookStore;
             modalNavigationStore = _modalNavigationStore;
             _booksListingItemViewModel = new ObservableCollection<BooksListingItemViewModel>();
+
+            selectedBookStore.SelectedBookChanged += SelectedBookStore_SelectedBookChanged;
 
             booksStore.BookDeleted += BooksStore_BookDeleted;
             booksStore.BooksLoaded += _booksStore_BooksLoaded;
             booksStore.BookAdded += BooksStore_BookAdded;
-            booksStore.BookUpdated += BooksStore_BookUpdated;       
+            booksStore.BookUpdated += BooksStore_BookUpdated;
+
+            _booksListingItemViewModel.CollectionChanged += _booksListingItemViewModel_CollectionChanged;
+        }
+
+        private void _booksListingItemViewModel_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(SelectedBookListingItemViewModel));
+        }
+
+        private void SelectedBookStore_SelectedBookChanged()
+        {
+            OnPropertyChanged(nameof(SelectedBookListingItemViewModel));
         }
 
         private void BooksStore_BookDeleted(Guid id)
@@ -86,6 +97,7 @@ namespace LibraryManager_2._0.ViewModels
             booksStore.BooksLoaded -= _booksStore_BooksLoaded;
             booksStore.BookUpdated -= BooksStore_BookUpdated;
             booksStore.BookAdded -= BooksStore_BookAdded;
+            selectedBookStore.SelectedBookChanged -= SelectedBookStore_SelectedBookChanged;
             base.Dispose(); 
         }
         private void BooksStore_BookAdded(Book obj)

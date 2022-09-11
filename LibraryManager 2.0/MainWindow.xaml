@@ -19,13 +19,13 @@
         </DataTemplate>
     </Window.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <Grid >
+        <Grid>
             <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
                 <ContentControl Margin="50 5" Content="{Binding CurrentModalViewModel}"/>
                 
-            </modalcontrol:Modal> 
-            
-            <views:BooksView Margin="25" DataContext="{Binding BooksViewModel}"/>
+            </modalcontrol:Modal>
+
+            <views:BooksView MaxWidth="1000" MaxHeight="400" Margin="25" DataContext="{Binding BooksViewModel}"/>
         </Grid>
     </ScrollViewer>
 </Window>

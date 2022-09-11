@@ -16,7 +16,7 @@ namespace LibraryManager_2._0.ViewModels
         public bool HasSelectedBook => selectedBook != null;
         private Book selectedBook => _selctedBookStore.SelectedBook; 
         public string Author => selectedBook?.Author ?? "Unkonwn";
-        public string Date => selectedBook?.Date.ToString() ?? "Unkonwn";
+        public string Date => selectedBook?.Date.ToString().Substring(0,selectedBook.Date.ToString().Length - 7) ?? "Unkonwn";
         public string Title => selectedBook?.Title ?? "Unkonwn";
         public string Genre => selectedBook?.Genre ?? "Unkonwn";
         public string Language => selectedBook?.Language ?? "Unkonwn";
